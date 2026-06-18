@@ -329,7 +329,7 @@ export default function App() {
             </div>
             <div>
               <span className="text-lg font-bold font-display tracking-tight text-slate-900 leading-none">
-                OptiPress Pro
+                SwiftPress Image Tool
               </span>
               <span className="hidden sm:inline-block text-[10px] bg-slate-100 text-slate-500 font-bold border border-slate-200 px-1.5 py-0.5 rounded ml-3 font-mono">
                 v2.4
@@ -820,7 +820,7 @@ export default function App() {
                 <div id="comparison-display-box" className="bg-slate-200/50 border border-slate-200 rounded-xl p-4 flex flex-col items-center justify-center relative min-h-[350px]">
                   
                   {!result ? (
-                    /* Shows Original preview side with badge layout matching OptiPress Pro theme closely */
+                    /* Shows Original preview side with badge layout matching SwiftPress Image Tool theme closely */
                     <div className="w-full relative flex flex-col items-center gap-4">
                       <div className="absolute top-4 left-4 z-10 bg-black/60 text-white text-[10px] font-bold px-2.5 py-1 rounded backdrop-blur-md">
                         ORIGINAL: {formatBytes(imageState.size)}
