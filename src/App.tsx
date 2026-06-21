@@ -374,16 +374,6 @@ export default function App() {
         
         {mainTab === 'image' ? (
           <>
-            {/* Intro pitch & info badge */}
-            <div className="max-w-3xl">
-              <h2 className="text-3xl font-extrabold font-display tracking-tight text-slate-900 md:text-4xl text-pretty">
-                Resize & Compress Images Instantly
-              </h2>
-              <p className="mt-2 text-slate-600 leading-relaxed text-sm text-pretty">
-                Easily optimize photographs to match size constraints for job boards, government identification filings, university admissions, and visa application portals. Private compression occurs entirely inside your browser. No files are ever sent to a server.
-              </p>
-            </div>
-
             {/* Outer 2-Column Responsive Workspace Grid (Sidebar w-80 style matched inside layout) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
@@ -741,25 +731,6 @@ export default function App() {
 
             </div> {/* /card */}
 
-            {/* General Information card for Gov Job Uploaders */}
-            <div id="job-portal-specs-card" className="bg-slate-900 text-slate-100 rounded-xl p-5 border border-slate-800 flex flex-col gap-3 shadow-inner">
-              <h3 className="text-xs font-bold font-mono tracking-wider uppercase text-slate-400 flex items-center gap-1.5">
-                <Info className="w-3.5 h-3.5 text-blue-400" />
-                Upload Guidelines
-              </h3>
-              <ul className="text-xs text-slate-300 leading-relaxed space-y-2 list-disc list-inside">
-                <li>
-                  <strong className="text-white">White Backgrounds</strong>: Standard passport rules mandate off-white backdrops.
-                </li>
-                <li>
-                  <strong className="text-white">Strict Formats</strong>: Use the <code className="text-blue-300 font-bold font-mono">Force JPEG</code> format option if state portals restrict extensions.
-                </li>
-                <li>
-                  <strong className="text-white">Legible Scans</strong>: Maintain aspects when uploading thumbprints and digital signatures to avoid warping.
-                </li>
-              </ul>
-            </div>
-
           </div> {/* /left-column */}
 
 
@@ -994,28 +965,7 @@ export default function App() {
               </div>
             )}
 
-            {/* Quick Reference FAQ Cards */}
-            <div id="quick-reference-faq" className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-white border border-slate-200/80 rounded-xl p-4 shadow-xs">
-                <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wide font-mono flex items-center gap-1.5 mb-2">
-                  <span className="text-blue-600">•</span>
-                  How does compression work?
-                </h4>
-                <p className="text-xs text-slate-500 leading-relaxed text-pretty">
-                  The optimizer first shapes the photo to your exact width and height specifications. It then employs rapid visual searches on lossy algorithms to resolve quality factors staying strictly under your file KB target. If necessary, it downscales slightly to fit the constraints.
-                </p>
-              </div>
 
-              <div id="is-personal-data-private" className="bg-white border border-slate-200/80 rounded-xl p-4 shadow-xs">
-                <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wide font-mono flex items-center gap-1.5 mb-2">
-                  <span className="text-blue-600">•</span>
-                  Is my personal photo safe?
-                </h4>
-                <p className="text-xs text-slate-500 leading-relaxed text-pretty">
-                  Yes, absolutely. This utility runs entirely inside your client browser sandbox. None of your identification photos, personal resumes, or signature scans are uploaded to external rendering systems. Your data stays 100% private.
-                </p>
-              </div>
-            </div>
 
           </div> {/* /right-column */}
 
