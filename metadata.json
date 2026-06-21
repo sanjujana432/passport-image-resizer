@@ -1,5 +1,5 @@
 {
-  "name": "SwiftPress Image Tool",
+  "name": "SwiftPress Tool",
   "description": "An easy-to-use utility to resize and compress images (JPEG, PNG, WebP) to target pixel dimensions and maximum file size limits in KB.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

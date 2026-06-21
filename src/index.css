@@ -6,3 +6,24 @@
   --font-display: "Outfit", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
+
+@keyframes flash-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(3px);
+    border-color: rgba(59, 130, 246, 0.6);
+    background-color: rgb(239, 246, 255);
+  }
+  40% {
+    border-color: rgba(59, 130, 246, 0.6);
+    background-color: rgb(239, 246, 255);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-flash-in {
+  animation: flash-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

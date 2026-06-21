@@ -30,6 +30,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ImageFileState, CompressionSettings, CompressionResult } from './types';
 import { loadImage, processImageCompression } from './utils/imageProcess';
 import { BeforeAfterSlider } from './components/BeforeAfterSlider';
+import { PdfSplitter } from './components/PdfSplitter';
+import { PdfConverter } from './components/PdfConverter';
+import { PdfMerger } from './components/PdfMerger';
 
 // Dimension Presets
 interface DimensionPreset {
@@ -63,6 +66,8 @@ const FORMAT_OPTIONS = [
 
 export default function App() {
   // Application State
+  const [mainTab, setMainTab] = useState<'image' | 'pdf'>('image');
+  const [pdfSubTab, setPdfSubTab] = useState<'split' | 'convert' | 'merge'>('split');
   const [imageState, setImageState] = useState<ImageFileState | null>(null);
   const [settings, setSettings] = useState<CompressionSettings>({
     width: 800,
@@ -329,7 +334,7 @@ export default function App() {
             </div>
             <div>
               <span className="text-lg font-bold font-display tracking-tight text-slate-900 leading-none">
-                SwiftPress Image Tool
+                SwiftPress Tool
               </span>
               <span className="hidden sm:inline-block text-[10px] bg-slate-100 text-slate-500 font-bold border border-slate-200 px-1.5 py-0.5 rounded ml-3 font-mono">
                 v2.4
@@ -337,11 +342,29 @@ export default function App() {
             </div>
           </div>
           
-          <nav className="flex gap-4 sm:gap-6 text-xs sm:text-sm font-medium text-slate-500">
-            <a href="#controls-workspace" className="text-blue-600 font-semibold border-b-2 border-blue-600 pb-1 translate-y-[1px]">Optimizer</a>
-            <a href="#quick-reference-faq" className="hover:text-slate-800 transition-colors">Batch Policy</a>
-            <a href="#job-portal-specs-card" className="hover:text-slate-800 transition-colors">Portal Scans</a>
-            <a href="#is-personal-data-private" className="hover:text-slate-800 transition-colors">Support</a>
+          <nav className="flex gap-4 sm:gap-6 text-xs sm:text-sm font-medium">
+            <button
+              onClick={() => setMainTab('image')}
+              className={`pb-1 border-b-2 transition-colors cursor-pointer text-xs sm:text-sm ${
+                mainTab === 'image'
+                  ? 'text-blue-600 font-semibold border-blue-600'
+                  : 'text-slate-500 hover:text-slate-800 border-transparent'
+              }`}
+              type="button"
+            >
+              Image Resizer
+            </button>
+            <button
+              onClick={() => setMainTab('pdf')}
+              className={`pb-1 border-b-2 transition-colors cursor-pointer text-xs sm:text-sm ${
+                mainTab === 'pdf'
+                  ? 'text-blue-600 font-semibold border-blue-600'
+                  : 'text-slate-500 hover:text-slate-800 border-transparent'
+              }`}
+              type="button"
+            >
+              PDF Utilities
+            </button>
           </nav>
         </div>
       </header>
@@ -349,18 +372,20 @@ export default function App() {
       {/* Main Structural Body */}
       <main id="app-main-workspace" className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
         
-        {/* Intro pitch & info badge */}
-        <div className="max-w-3xl">
-          <h2 className="text-3xl font-extrabold font-display tracking-tight text-slate-900 md:text-4xl text-pretty">
-            Resize & Compress Images Instantly
-          </h2>
-          <p className="mt-2 text-slate-600 leading-relaxed text-sm text-pretty">
-            Easily optimize photographs to match size constraints for job boards, government identification filings, university admissions, and visa application portals. Private compression occurs entirely inside your browser. No files are ever sent to a server.
-          </p>
-        </div>
+        {mainTab === 'image' ? (
+          <>
+            {/* Intro pitch & info badge */}
+            <div className="max-w-3xl">
+              <h2 className="text-3xl font-extrabold font-display tracking-tight text-slate-900 md:text-4xl text-pretty">
+                Resize & Compress Images Instantly
+              </h2>
+              <p className="mt-2 text-slate-600 leading-relaxed text-sm text-pretty">
+                Easily optimize photographs to match size constraints for job boards, government identification filings, university admissions, and visa application portals. Private compression occurs entirely inside your browser. No files are ever sent to a server.
+              </p>
+            </div>
 
-        {/* Outer 2-Column Responsive Workspace Grid (Sidebar w-80 style matched inside layout) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            {/* Outer 2-Column Responsive Workspace Grid (Sidebar w-80 style matched inside layout) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
           {/* LEFT COLUMN: Controls Sidebar (lg:col-span-5) */}
           <div id="controls-workspace" className="lg:col-span-5 flex flex-col gap-5">
@@ -820,7 +845,7 @@ export default function App() {
                 <div id="comparison-display-box" className="bg-slate-200/50 border border-slate-200 rounded-xl p-4 flex flex-col items-center justify-center relative min-h-[350px]">
                   
                   {!result ? (
-                    /* Shows Original preview side with badge layout matching SwiftPress Image Tool theme closely */
+                    /* Shows Original preview side with badge layout matching SwiftPress Tool theme closely */
                     <div className="w-full relative flex flex-col items-center gap-4">
                       <div className="absolute top-4 left-4 z-10 bg-black/60 text-white text-[10px] font-bold px-2.5 py-1 rounded backdrop-blur-md">
                         ORIGINAL: {formatBytes(imageState.size)}
@@ -995,6 +1020,58 @@ export default function App() {
           </div> {/* /right-column */}
 
         </div> {/* /grid */}
+          </>
+        ) : (
+          <>
+            {/* PDF HEADER */}
+            <div className="max-w-3xl">
+              <h2 className="text-3xl font-extrabold font-display tracking-tight text-slate-900 md:text-4xl text-pretty">
+                Advanced PDF Utilities
+              </h2>
+              <p className="mt-2 text-slate-600 leading-relaxed text-sm text-pretty">
+                Split, reorder, merge, or convert files directly in your browser. All computations are calculated locally utilizing secure client sandbox processes, ensuring absolute safety.
+              </p>
+            </div>
+
+            {/* PDF TAB SELECTOR */}
+            <div className="flex border-b border-slate-200 gap-2 sm:gap-4 text-xs sm:text-sm font-semibold text-slate-400">
+              <button
+                onClick={() => setPdfSubTab('split')}
+                className={`pb-3 border-b-2 transition-all cursor-pointer ${
+                  pdfSubTab === 'split' ? 'border-blue-600 text-blue-600 font-bold' : 'border-transparent hover:text-slate-700'
+                }`}
+                type="button"
+              >
+                1. Split & Reorder Pages
+              </button>
+              <button
+                onClick={() => setPdfSubTab('convert')}
+                className={`pb-3 border-b-2 transition-all cursor-pointer ${
+                  pdfSubTab === 'convert' ? 'border-blue-600 text-blue-600 font-bold' : 'border-transparent hover:text-slate-700'
+                }`}
+                type="button"
+              >
+                2. Document Converter
+              </button>
+              <button
+                onClick={() => setPdfSubTab('merge')}
+                className={`pb-3 border-b-2 transition-all cursor-pointer ${
+                  pdfSubTab === 'merge' ? 'border-blue-600 text-blue-600 font-bold' : 'border-transparent hover:text-slate-700'
+                }`}
+                type="button"
+              >
+                3. PDF Merge Tool
+              </button>
+            </div>
+
+            {/* Render PDF sub-panels */}
+            <div className="flex flex-col gap-6">
+              {pdfSubTab === 'split' && <PdfSplitter />}
+              {pdfSubTab === 'convert' && <PdfConverter />}
+              {pdfSubTab === 'merge' && <PdfMerger />}
+            </div>
+          </>
+        )}
 
       </main>
 
