@@ -374,6 +374,16 @@ export default function App() {
         
         {mainTab === 'image' ? (
           <>
+            {/* Image Header */}
+            <div className="max-w-3xl">
+              <h2 className="text-3xl font-extrabold font-display tracking-tight text-slate-900 md:text-4xl text-pretty">
+                Image Resizer & Compressor
+              </h2>
+              <p className="mt-2 text-slate-600 leading-relaxed text-sm text-pretty">
+                Easily optimize, resize, and compress your photographs to target-specific pixel dimensions and maximum file size limits in KB. All processing occurs locally in your browser sandbox.
+              </p>
+            </div>
+
             {/* Outer 2-Column Responsive Workspace Grid (Sidebar w-80 style matched inside layout) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
